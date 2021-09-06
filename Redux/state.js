@@ -1,4 +1,6 @@
-import {RerenderJs} from "../RerenderJs"
+let RerenderJs=()=>{
+  console.log("privet");
+}
 let state ={
   profilePage:{
   postData:[
@@ -26,7 +28,7 @@ let state ={
   
 },}
   
- export let addPostState=()=>{
+ export const addPostState=()=>{
   let newpost ={
     id:4,
     message:state.profilePage.newPostText,
@@ -36,9 +38,13 @@ let state ={
   state.profilePage.newPostText="";
   RerenderJs(state);
   }
- export let changePostState=(postChange)=>{
+ export const changePostState=(postChange)=>{
    state.profilePage.newPostText=postChange;
    RerenderJs(state);
+  }
+  export const subscribe=(observer)=>{
+    RerenderJs=observer;
+
   }
   export default state;
   
