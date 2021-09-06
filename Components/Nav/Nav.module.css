@@ -1,0 +1,17 @@
+.nav {
+  grid-area: n;
+  background-color: green;
+  display: flex;
+  flex-direction: column;
+}
+.item {
+  background-color: cadetblue;
+  padding: 5px;
+  margin: 5px;
+}
+.item a {
+  text-decoration: none;
+}
+.item a.activelink {
+  color: rgb(255, 81, 7);
+}

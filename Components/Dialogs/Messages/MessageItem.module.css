@@ -1,0 +1,22 @@
+.item {
+  display: flex;
+  flex-wrap: nowrap;
+  flex-direction: row;
+  padding-bottom: 10px;
+  width: 100%;
+  word-break: break-all;
+  max-width: 250px;
+}
+.item:nth-child(odd) {
+  color: yellow;
+}
+.item:nth-child(even) {
+  padding-left: 30%;
+  padding-right: 10%;
+  overflow: hidden;
+  color: blue;
+}
+.item img {
+  height: 50px;
+  width: 50px;
+}
