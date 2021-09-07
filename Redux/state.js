@@ -1,7 +1,9 @@
-let RerenderJs=()=>{
-  console.log("privet");
-}
-let state ={
+let store={
+  getState(){
+    return this._state;
+  },
+_RerenderJs(){},
+_state:{
   profilePage:{
   postData:[
     { id: 1, message: "It's my first post", likesCount: 15 },
@@ -26,25 +28,24 @@ let state ={
     { id: "5", name: "Petro" },
   ],
   
-},}
-  
- export const addPostState=()=>{
+},},
+addPostState(){
   let newpost ={
     id:4,
-    message:state.profilePage.newPostText,
+    message:this._state.profilePage.newPostText,
     likesCount:0,    
   };
-  state.profilePage.postData.push(newpost);
-  state.profilePage.newPostText="";
-  RerenderJs(state);
-  }
- export const changePostState=(postChange)=>{
-   state.profilePage.newPostText=postChange;
-   RerenderJs(state);
-  }
-  export const subscribe=(observer)=>{
-    RerenderJs=observer;
+  this._state.profilePage.postData.push(newpost);
+  this._state.profilePage.newPostText="";
+  this._RerenderJs(this._state);
+  },
+  changePostState(postChange){ 
+    this._state.profilePage.newPostText=postChange;
+    this._RerenderJs(this._state);
+   },
+  subscribe(observer){
+    this._RerenderJs=observer;
 
-  }
-  export default state;
+  },}
+  export default store;
   
