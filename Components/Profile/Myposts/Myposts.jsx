@@ -8,7 +8,6 @@ const Myposts = (props) => {
     <Post message={p.message} likesCount={p.likesCount} />
   ));
   let newPostElement = React.createRef();
-  debugger;
   let addPost = () => {
     props.dispatch(addPostActionCreater());
   };

@@ -7,7 +7,7 @@ import Nav from "./Components/Nav/Nav";
 import News from "./Components/News/News";
 import Profile from "./Components/Profile/Profile.jsx";
 import Settings from "./Components/Settings./Settings";
-import store from "./Redux/state";
+
 
 const App = (props) => {
   return (

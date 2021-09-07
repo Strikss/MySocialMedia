@@ -1,3 +1,6 @@
+const CHANGE_POST="CHANGE-POST";
+const ADD_POST="ADD-POST";
+
 let store={
 _RerenderJs(){},
 _state:{
@@ -34,7 +37,7 @@ _state:{
 
   },
    dispatch(action){
-  if (action.type==="ADD-POST"){
+  if (action.type===ADD_POST){
   let newpost ={
     id:4,
     message:this._state.profilePage.newPostText,
@@ -44,7 +47,7 @@ _state:{
   this._state.profilePage.newPostText="";
   this._RerenderJs(this._state);
   }
-  else if(action.type==="CHANGE-POST"){
+  else if(action.type===CHANGE_POST){
     this._state.profilePage.newPostText=action.postChange;
     this._RerenderJs(this._state);
   }
@@ -53,12 +56,13 @@ _state:{
 }
 export let changePostActionCreator=(text)=>{
   return{
-    type:"CHANGE-POST",postChange:text,
+    type:CHANGE_POST,
+    postChange:text,
   }
 }
 export let addPostActionCreater=()=>{
   return{
-    type:"ADD-POST"
+    type:ADD_POST,
   }
 }
   export default store;
