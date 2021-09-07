@@ -15,8 +15,10 @@ const App = (props) => {
       <Header/>
       <Nav/>
       <div className="content">
-      <Route path="/profile" render={()=><Profile posts={props.State.profilePage} addPost={store.addPostState.bind(store)}
-      changePostState={store.changePostState.bind(store)}/>}/>
+      <Route path="/profile" render={()=><Profile 
+      posts={props.State.profilePage} 
+      dispatch={props.dispatch}
+      />}/>
       <Route path="/dialogs" render={()=><Dialogs dialog={props.State.messagesPage} />}/>
       <Route path="/news" component={News}/>
       <Route path="/music" component={Music}/>

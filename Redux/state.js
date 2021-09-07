@@ -1,7 +1,4 @@
 let store={
-  getState(){
-    return this._state;
-  },
 _RerenderJs(){},
 _state:{
   profilePage:{
@@ -29,7 +26,15 @@ _state:{
   ],
   
 },},
-addPostState(){
+  getState(){
+    return this._state;
+  },
+  subscribe(observer){
+    this._RerenderJs=observer;
+
+  },
+   dispatch(action){
+  if (action.type==="ADD-POST"){
   let newpost ={
     id:4,
     message:this._state.profilePage.newPostText,
@@ -38,14 +43,23 @@ addPostState(){
   this._state.profilePage.postData.push(newpost);
   this._state.profilePage.newPostText="";
   this._RerenderJs(this._state);
-  },
-  changePostState(postChange){ 
-    this._state.profilePage.newPostText=postChange;
+  }
+  else if(action.type==="CHANGE-POST"){
+    this._state.profilePage.newPostText=action.postChange;
     this._RerenderJs(this._state);
-   },
-  subscribe(observer){
-    this._RerenderJs=observer;
-
-  },}
+  }
+  }
+  
+}
+export let changePostActionCreator=(text)=>{
+  return{
+    type:"CHANGE-POST",postChange:text,
+  }
+}
+export let addPostActionCreater=()=>{
+  return{
+    type:"ADD-POST"
+  }
+}
   export default store;
   

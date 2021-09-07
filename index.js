@@ -9,7 +9,10 @@ let RerenderJs=(state)=>{
 ReactDOM.render(
   <BrowserRouter>
   <React.StrictMode>
-    <App State={state}/>
+    <App 
+    State={state}
+    dispatch={store.dispatch.bind(store)}
+    />
   </React.StrictMode>
   </BrowserRouter>,
   document.getElementById('root')

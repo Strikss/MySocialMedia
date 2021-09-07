@@ -7,9 +7,8 @@ const Profile = (props) => {
     <div className={classes.profileContainer}>
       <ProfileInfo />
       <Myposts
-        changePostState={props.changePostState}
+        dispatch={props.dispatch}
         posts={props.posts.postData}
-        addPost={props.addPost}
         newPostText={props.posts.newPostText}
       />
     </div>
