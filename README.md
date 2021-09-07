@@ -1,4 +1,7 @@
 This is my frist react project, using all the tools that i learned to create a social media.Still not finished, have alot of drawbacks, and css is not that good.
+But the concepts are there
+
+#MY SOCIAL MEDIA
 Package json setup:
 {
   "name": "mishavf",
