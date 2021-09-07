@@ -1,10 +1,12 @@
+import dialogReducer from "./dialogReducer";
+import profileReducer from "./profileReducer";
+
 const CHANGE_POST="CHANGE-POST";
 const ADD_POST="ADD-POST";
 const ADD_SMS ="ADD-SMS"
 const CHANGE_SMS="CHANGE-SMS"
 
 let store={
-_RerenderJs(){},
 _state:{
   profilePage:{
   postData:[
@@ -38,58 +40,14 @@ _state:{
     this._RerenderJs=observer;
 
   },
-   dispatch(action){
-  if (action.type===ADD_POST){
-  let newpost ={
-    id:4,
-    message:this._state.profilePage.newPostText,
-    likesCount:0,    
-  };
-  this._state.profilePage.postData.push(newpost);
-  this._state.profilePage.newPostText="";
-  this._RerenderJs(this._state);
-  }
-  else if(action.type===CHANGE_POST){
-    this._state.profilePage.newPostText=action.postChange;
+   
+  dispatch(action){
+    this._state.profilePage = profileReducer(this._state.profilePage,action),
+    this._state.messagesPage=dialogReducer(this._state.messagesPage,action)
     this._RerenderJs(this._state);
-  }
-  else if(action.type===ADD_SMS){
-    let newSms={
-      id:4,
-      message:this._state.messagesPage.newMessageText,
-    }
-    this._state.messagesPage.messageData.push(newSms);
-    this._state.messagesPage.newMessageText="";
-    this._RerenderJs(this._state);
-  }
-  else if(action.type===CHANGE_SMS){
-    this._state.messagesPage.newMessageText=action.smsChange;
-    this._RerenderJs(this._state);
-  }
-  }
-  
+},
 }
-export let changePostActionCreator=(text)=>{
-  return{
-    type:CHANGE_POST,
-    postChange:text,
-  }
-}
-export let addPostActionCreater=()=>{
-  return{
-    type:ADD_POST,
-  }
-}
-export let changeSmsActionCreater=(text)=>{
-  return{
-    type:CHANGE_SMS,
-    smsChange:text,
-  }
-}
-export let addSmsActionCreator=()=>{
-  return{
-    type:ADD_SMS,
-  }
-}
+
+
   export default store;
   
