@@ -1,5 +1,7 @@
 const CHANGE_POST="CHANGE-POST";
 const ADD_POST="ADD-POST";
+const ADD_SMS ="ADD-SMS"
+const CHANGE_SMS="CHANGE-SMS"
 
 let store={
 _RerenderJs(){},
@@ -27,7 +29,7 @@ _state:{
     { id: "4", name: "Eliza" },
     { id: "5", name: "Petro" },
   ],
-  
+  newMessageText:"",
 },},
   getState(){
     return this._state;
@@ -51,6 +53,19 @@ _state:{
     this._state.profilePage.newPostText=action.postChange;
     this._RerenderJs(this._state);
   }
+  else if(action.type===ADD_SMS){
+    let newSms={
+      id:4,
+      message:this._state.messagesPage.newMessageText,
+    }
+    this._state.messagesPage.messageData.push(newSms);
+    this._state.messagesPage.newMessageText="";
+    this._RerenderJs(this._state);
+  }
+  else if(action.type===CHANGE_SMS){
+    this._state.messagesPage.newMessageText=action.smsChange;
+    this._RerenderJs(this._state);
+  }
   }
   
 }
@@ -63,6 +78,17 @@ export let changePostActionCreator=(text)=>{
 export let addPostActionCreater=()=>{
   return{
     type:ADD_POST,
+  }
+}
+export let changeSmsActionCreater=(text)=>{
+  return{
+    type:CHANGE_SMS,
+    smsChange:text,
+  }
+}
+export let addSmsActionCreator=()=>{
+  return{
+    type:ADD_SMS,
   }
 }
   export default store;
