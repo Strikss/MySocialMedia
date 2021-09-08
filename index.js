@@ -5,13 +5,12 @@ import ReactDOM from 'react-dom';
 import App from './App';
 import { BrowserRouter } from 'react-router-dom';
 
-let RerenderJs=(state)=>{ 
+let RerenderJs=()=>{ 
 ReactDOM.render(
   <BrowserRouter>
   <React.StrictMode>
     <App 
     store={store}
-    dispatch={store.dispatch.bind(store)}
     />
   </React.StrictMode>
   </BrowserRouter>,
