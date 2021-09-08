@@ -2,8 +2,6 @@ import classes from "./Dialogs.module.css";
 import MessageItem from "./Messages/MessageItem";
 import DialogItem from "./Dialogs/DialogItem";
 import React from "react";
-import { addSmsActionCreator } from "../../Redux/dialogReducer";
-import { changeSmsActionCreater } from "../../Redux/dialogReducer";
 
 const Dialogs = (props) => {
   debugger;
@@ -15,10 +13,10 @@ const Dialogs = (props) => {
   ));
   let onSmsChange = (e) => {
     let text = e.target.value;
-    props.dispatch(changeSmsActionCreater(text));
+    props.updateSmsText(text);
   };
   let addSms = () => {
-    props.dispatch(addSmsActionCreator());
+    props.addSms();
   };
   return (
     <div>
@@ -28,7 +26,7 @@ const Dialogs = (props) => {
       </div>
       <textarea
         onChange={onSmsChange}
-        value={props.dialog.newMessageText}
+        value={props.newMessageText}
         placeholder="Enter your message"
       ></textarea>
       <button onClick={addSms}>Send</button>
