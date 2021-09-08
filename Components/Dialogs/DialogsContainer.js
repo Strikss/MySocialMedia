@@ -21,4 +21,3 @@ let state = props.store.getState();
   );
 };
 export default DialogsContainer;
-

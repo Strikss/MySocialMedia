@@ -10,7 +10,7 @@ ReactDOM.render(
   <BrowserRouter>
   <React.StrictMode>
     <App 
-    state={state}
+    store={store}
     dispatch={store.dispatch.bind(store)}
     />
   </React.StrictMode>
@@ -18,7 +18,7 @@ ReactDOM.render(
   document.getElementById('root')
 );}
 
-RerenderJs(store.getState());
+RerenderJs();
 
 store.subscribe(()=>{
   let state = store.getState();
