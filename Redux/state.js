@@ -1,11 +1,6 @@
 import dialogReducer from "./dialogReducer";
 import profileReducer from "./profileReducer";
 
-const CHANGE_POST="CHANGE-POST";
-const ADD_POST="ADD-POST";
-const ADD_SMS ="ADD-SMS"
-const CHANGE_SMS="CHANGE-SMS"
-
 let store={
 _state:{
   profilePage:{

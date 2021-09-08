@@ -16,19 +16,21 @@ const App = (props) => {
       <Nav/>
       <div className="content">
       <Route path="/profile" render={()=><Profile 
-      posts={props.State.profilePage} 
+      posts={props.state.profilePage} 
       dispatch={props.dispatch}
       />}/>
       <Route path="/dialogs" render={()=><Dialogs
-       dialog={props.State.messagesPage}
+       dialog={props.state.messagesPage}
        dispatch={props.dispatch}
         />}/>
       <Route path="/news" component={News}/>
       <Route path="/music" component={Music}/>
       <Route path="/settings" component={Settings}/>
+
       </div>
+
     </div>
-    
+   
     
 );
   }

@@ -6,6 +6,7 @@ import { addSmsActionCreator } from "../../Redux/dialogReducer";
 import { changeSmsActionCreater } from "../../Redux/dialogReducer";
 
 const Dialogs = (props) => {
+  debugger;
   let dialogElements = props.dialog.dialogData.map((d) => (
     <DialogItem name={d.name} id={d.id} />
   ));
