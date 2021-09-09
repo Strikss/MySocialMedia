@@ -4,23 +4,18 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import App from './App';
 import { BrowserRouter } from 'react-router-dom';
+import { Provider } from 'react-redux';
 
-let RerenderJs=()=>{ 
+ 
 ReactDOM.render(
   <BrowserRouter>
   <React.StrictMode>
-    <App 
-    store={store}
-    />
+  <Provider store={store}>
+    <App />
+  </Provider>
   </React.StrictMode>
   </BrowserRouter>,
   document.getElementById('root')
-);}
+);
 
-RerenderJs();
-
-store.subscribe(()=>{
-  let state = store.getState();
-  RerenderJs(state);
-});
 
