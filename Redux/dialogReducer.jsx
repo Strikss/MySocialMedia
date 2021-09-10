@@ -37,7 +37,6 @@ const dialogReducer = (state = initialState, action) => {
         message: state.newMessageText,
       };
       let stateCopy = { ...state };
-      stateCopy.messageData = [...state.messageData];
       stateCopy.messageData.push(newSms);
       stateCopy.newMessageText = "";
       return stateCopy;

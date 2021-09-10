@@ -1,5 +1,4 @@
 import { NavLink } from "react-router-dom";
-import Friends from "./Friends/Friends";
 import classes from "./Nav.module.css";
 
 const Nav = () => {
@@ -30,8 +29,15 @@ const Nav = () => {
           Settings
         </NavLink>
       </div>
-      <div className={classes.Friends}>
-        <Friends />
+      <div className={classes.item}>
+        <NavLink to="/users" activeClassName={classes.activelink}>
+          Find Users
+        </NavLink>
+      </div>
+      <div className={classes.item}>
+        <NavLink to="/friends" activeClassName={classes.activelink}>
+          Friends
+        </NavLink>
       </div>
     </nav>
   );
