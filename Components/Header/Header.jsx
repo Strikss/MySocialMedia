@@ -1,9 +1,19 @@
-import classes from './Header.module.css';
-const Header=()=>{
-    return(
-        <header className={classes.header}>
-            <img src='https://www.freelogoservices.com/blog/wp-content/uploads/transparent-logo.jpg' height='64px' width ='64px'/>
-        </header>
-);
-}
+import classes from "./Header.module.css";
+import { NavLink } from "react-router-dom";
+const Header = (props) => {
+  return (
+    <header className={classes.header}>
+      <div className={classes.auth}>
+        <div>
+          {props.isAuth ? props.login : <NavLink to={"/login"}>login</NavLink>}
+        </div>
+      </div>
+      <img
+        src="https://www.freelogoservices.com/blog/wp-content/uploads/transparent-logo.jpg"
+        height="64px"
+        width="64px"
+      />
+    </header>
+  );
+};
 export default Header;

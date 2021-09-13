@@ -1,7 +1,7 @@
 import { Route } from "react-router-dom";
 import "./App.css";
 import DialogsContainer from "./Components/Dialogs/DialogsContainer";
-import Header from "./Components/Header/Header";
+import HeaderContainer from "./Components/Header/HeaderContainer";
 import Music from "./Components/Music/Music";
 import Nav from "./Components/Nav/Nav";
 import News from "./Components/News/News";
@@ -13,7 +13,7 @@ import UsersContainer from "./Components/Users/UsersContainer";
 const App = () => {
   return (
     <div className="app-wrapper">
-      <Header/>
+      <HeaderContainer/>
       <Nav/>
       <div className="content">
       <Route path="/profile/:userId?" render={()=><ProfileContainer/>}/>
