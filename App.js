@@ -5,7 +5,7 @@ import Header from "./Components/Header/Header";
 import Music from "./Components/Music/Music";
 import Nav from "./Components/Nav/Nav";
 import News from "./Components/News/News";
-import Profile from "./Components/Profile/Profile.jsx";
+import ProfileContainer from "./Components/Profile/ProfileContainer";
 import Settings from "./Components/Settings./Settings";
 import UsersContainer from "./Components/Users/UsersContainer";
 
@@ -16,7 +16,7 @@ const App = () => {
       <Header/>
       <Nav/>
       <div className="content">
-      <Route path="/profile" render={()=><Profile/>}/>
+      <Route path="/profile/:userId?" render={()=><ProfileContainer/>}/>
       <Route path="/dialogs" render={()=><DialogsContainer/>}/>
       <Route path="/news" component={News}/>
       <Route path="/music" component={Music}/>

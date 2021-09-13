@@ -10,7 +10,7 @@ import {
 import Users from "./Users";
 import * as axios from "axios";
 import React from "react";
-import Preloader from "../Common/Preloader/Preloader";
+import Preloader from "../Common/Preloader/Preloaders";
 
 class UsersAPIContainer extends React.Component {
   componentDidMount() {
@@ -65,17 +65,6 @@ let mapStateToProps = (state) => {
   };
 };
 
-let mapDispatchToProps = (dispatch) => {
-  return {
-    follow: (userId) => dispatch(follow(userId)),
-    unfollow: (userId) => dispatch(unFollow(userId)),
-    setUsers: (users) => dispatch(setUsers(users)),
-    setCurrentPage: (currentPage) => dispatch(setCurrentPage(currentPage)),
-    setTotalUsersCount: (totalUsers) =>
-      dispatch(setTotalUsersCount(totalUsers)),
-    isFetchingD: (loading) => dispatch(isFetchingD(loading)),
-  };
-};
 const UsersContainer = connect(mapStateToProps, {
   follow,
   unfollow,

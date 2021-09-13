@@ -1,5 +1,6 @@
 const CHANGE_POST = "CHANGE-POST";
 const ADD_POST = "ADD-POST";
+const SETPROFILESTATE = "SETPROFILESTATE";
 
 export let changePostActionCreator = (text) => {
   return {
@@ -12,6 +13,12 @@ export let addPostActionCreater = () => {
     type: ADD_POST,
   };
 };
+export let setProfileState = (profileInfo) => {
+  return {
+    type: SETPROFILESTATE,
+    profileInfo,
+  };
+};
 
 let initialState = {
   postData: [
@@ -20,6 +27,7 @@ let initialState = {
     { id: 3, message: "helpa me bratan", likesCount: 30 },
   ],
   newPostText: "",
+  profileState: null,
 };
 const profileReducer = (state = initialState, action) => {
   switch (action.type) {
@@ -38,6 +46,12 @@ const profileReducer = (state = initialState, action) => {
       let stateCopy = { ...state };
       stateCopy.newPostText = action.postChange;
       return stateCopy;
+    case SETPROFILESTATE: {
+      return {
+        ...state,
+        profileState: action.profileInfo,
+      };
+    }
     default:
       return state;
   }
