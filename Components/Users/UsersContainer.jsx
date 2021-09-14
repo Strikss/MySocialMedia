@@ -8,37 +8,29 @@ import {
   isFetchingD,
 } from "../../Redux/usersReducer";
 import Users from "./Users";
-import * as axios from "axios";
+import { userApi } from "../../Api/Api";
 import React from "react";
 import Preloader from "../Common/Preloader/Preloaders";
 
 class UsersAPIContainer extends React.Component {
   componentDidMount() {
     this.props.isFetchingD(true);
-    axios
-      .get(
-        `https://social-network.samuraijs.com/api/1.0/users?page=${this.props.currentPage}&count=${this.props.pageSize}`,
-        { withCredentials: true }
-      )
-      .then((response) => {
+    userApi
+      .getUsers(this.props.currentPage, this.props.pageSize)
+      .then((data) => {
         this.props.isFetchingD(false);
-        this.props.setUsers(response.data.items);
-        this.props.setTotalUsersCount(response.data.totalCount);
+        this.props.setUsers(data.items);
+        this.props.setTotalUsersCount(data.totalCount);
       });
   }
   setUsersPage = (n) => {
     this.props.setCurrentPage(n);
     this.props.isFetchingD(true);
-    axios
-      .get(
-        `https://social-network.samuraijs.com/api/1.0/users?page=${n}&count=${this.props.pageSize}`,
-        { withCredentials: true }
-      )
 
-      .then((response) => {
-        this.props.isFetchingD(false);
-        this.props.setUsers(response.data.items);
-      });
+    userApi.setUsers(n, this.props.pageSize).then((data) => {
+      this.props.isFetchingD(false);
+      this.props.setUsers(data.items);
+    });
   };
   render() {
     return (
