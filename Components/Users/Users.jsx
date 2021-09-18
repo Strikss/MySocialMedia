@@ -51,7 +51,6 @@ let Users = (props) => {
                         }
                       )
                       .then((response) => {
-                        debugger;
                         if (response.data.resultCode == 0) {
                           props.unfollow(u.id);
                         }

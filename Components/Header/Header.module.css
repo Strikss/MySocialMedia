@@ -1,6 +1,6 @@
 .header {
   grid-area: h;
-  background-color: blue;
+  background: linear-gradient(to left, #aa4b6b, #6b6b83, #292e49);
 }
 .auth * {
   color: white;

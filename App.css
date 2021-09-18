@@ -12,6 +12,6 @@ textarea {
   resize: none;
 }
 .content {
-  background-color: hotpink;
+  background: linear-gradient(to right, #bbd2c5, #536976, #292e49);
   grid-area: c;
 }
