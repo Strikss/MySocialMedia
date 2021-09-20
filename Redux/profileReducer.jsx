@@ -1,6 +1,7 @@
 const CHANGE_POST = "CHANGE-POST";
 const ADD_POST = "ADD-POST";
 const SETPROFILESTATE = "SETPROFILESTATE";
+import { userApi } from "../Api/Api";
 
 export let changePostActionCreator = (text) => {
   return {
@@ -56,4 +57,12 @@ const profileReducer = (state = initialState, action) => {
       return state;
   }
 };
+export let userIdThunk = (userId) => {
+  return (dispatch) => {
+    userApi.getUserId(userId).then((response) => {
+      dispatch(setProfileState(response.data));
+    });
+  };
+};
+
 export default profileReducer;

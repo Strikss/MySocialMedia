@@ -2,7 +2,6 @@ import classes from "./Users.module.css";
 import React from "react";
 import photo from "../../Avatar/user.png";
 import { NavLink } from "react-router-dom";
-import * as axios from "axios";
 
 let Users = (props) => {
   let pagesCount = Math.ceil(props.totalUsersCount / props.pageSize);
@@ -39,45 +38,18 @@ let Users = (props) => {
             <div>
               {u.followed ? (
                 <button
+                  disabled={props.inProgress.some((id) => id === u.id)}
                   onClick={() => {
-                    axios
-                      .delete(
-                        `https://social-network.samuraijs.com/api/1.0/follow/${u.id}`,
-                        {
-                          withCredentials: true,
-                          headers: {
-                            "API-KEY": "d0be37e1-edcf-49b4-934d-161e99adcc12",
-                          },
-                        }
-                      )
-                      .then((response) => {
-                        if (response.data.resultCode == 0) {
-                          props.unfollow(u.id);
-                        }
-                      });
+                    props.unFollowThunk(u.id);
                   }}
                 >
                   unfollow
                 </button>
               ) : (
                 <button
+                  disabled={props.inProgress.some((id) => id === u.id)}
                   onClick={() => {
-                    axios
-                      .post(
-                        `https://social-network.samuraijs.com/api/1.0/follow/${u.id}`,
-                        {},
-                        {
-                          withCredentials: true,
-                          headers: {
-                            "API-KEY": "d0be37e1-edcf-49b4-934d-161e99adcc12",
-                          },
-                        }
-                      )
-                      .then((response) => {
-                        if (response.data.resultCode == 0) {
-                          props.follow(u.id);
-                        }
-                      });
+                    props.followThunk(u.id);
                   }}
                 >
                   follow

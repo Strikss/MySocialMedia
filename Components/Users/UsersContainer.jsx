@@ -1,36 +1,27 @@
 import { connect } from "react-redux";
 import {
-  follow,
-  unfollow,
   setUsers,
   setCurrentPage,
   setTotalUsersCount,
   isFetchingD,
+  userInProgress,
+  getUsersThunk,
+  setUsersThunk,
+  followThunk,
+  unFollowThunk,
 } from "../../Redux/usersReducer";
 import Users from "./Users";
-import { userApi } from "../../Api/Api";
 import React from "react";
 import Preloader from "../Common/Preloader/Preloaders";
+import { compose } from "redux";
+import { withAuthRedirect } from "../Hoc/Hoc";
 
-class UsersAPIContainer extends React.Component {
+class UsersContainer extends React.Component {
   componentDidMount() {
-    this.props.isFetchingD(true);
-    userApi
-      .getUsers(this.props.currentPage, this.props.pageSize)
-      .then((data) => {
-        this.props.isFetchingD(false);
-        this.props.setUsers(data.items);
-        this.props.setTotalUsersCount(data.totalCount);
-      });
+    this.props.getUsersThunk(this.props.currentPage, this.props.pageSize);
   }
   setUsersPage = (n) => {
-    this.props.setCurrentPage(n);
-    this.props.isFetchingD(true);
-
-    userApi.setUsers(n, this.props.pageSize).then((data) => {
-      this.props.isFetchingD(false);
-      this.props.setUsers(data.items);
-    });
+    this.props.setUsersThunk(n, this.props.pageSize);
   };
   render() {
     return (
@@ -41,9 +32,11 @@ class UsersAPIContainer extends React.Component {
           pageSize={this.props.pageSize}
           currentPage={this.props.currentPage}
           users={this.props.users}
-          unfollow={this.props.unfollow}
-          follow={this.props.follow}
           setUsersPage={this.setUsersPage}
+          inProgress={this.props.inProgress}
+          userInProgress={this.props.userInProgress}
+          followThunk={this.props.followThunk}
+          unFollowThunk={this.props.unFollowThunk}
         />
       </>
     );
@@ -56,15 +49,21 @@ let mapStateToProps = (state) => {
     totalUsersCount: state.usersPage.totalUsersCount,
     currentPage: state.usersPage.currentPage,
     isFetching: state.usersPage.isFetching,
+    inProgress: state.usersPage.inProgress,
   };
 };
 
-const UsersContainer = connect(mapStateToProps, {
-  follow,
-  unfollow,
-  setUsers,
-  setCurrentPage,
-  setTotalUsersCount,
-  isFetchingD,
-})(UsersAPIContainer);
-export default UsersContainer;
+export default compose(
+  connect(mapStateToProps, {
+    setUsers,
+    setCurrentPage,
+    setTotalUsersCount,
+    isFetchingD,
+    userInProgress,
+    getUsersThunk,
+    setUsersThunk,
+    unFollowThunk,
+    followThunk,
+  }),
+  withAuthRedirect
+)(UsersContainer);

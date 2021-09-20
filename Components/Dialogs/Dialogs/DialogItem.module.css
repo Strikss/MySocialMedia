@@ -1,6 +1,6 @@
 .item a {
   text-decoration: none;
-  color: darkslategray;
+  color: rgb(80, 5, 255);
 }
 .item a.activelink {
   color: chartreuse;
