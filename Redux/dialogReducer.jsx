@@ -1,14 +1,9 @@
 const ADD_SMS = "ADD-SMS";
-const CHANGE_SMS = "CHANGE-SMS";
-export let changeSmsActionCreater = (text) => {
-  return {
-    type: CHANGE_SMS,
-    smsChange: text,
-  };
-};
-export let addSmsActionCreator = () => {
+
+export let addSms = (message) => {
   return {
     type: ADD_SMS,
+    message,
   };
 };
 let initialState = {
@@ -26,25 +21,16 @@ let initialState = {
     { id: "4", name: "Eliza" },
     { id: "5", name: "Petro" },
   ],
-  newMessageText: "",
 };
 
 const dialogReducer = (state = initialState, action) => {
   switch (action.type) {
     case ADD_SMS: {
-      let newSms = {
-        id: 4,
-        message: state.newMessageText,
+      return {
+        ...state,
+        messageData: [...state.messageData, { id: 6, message: action.message }],
       };
-      let stateCopy = { ...state };
-      stateCopy.messageData.push(newSms);
-      stateCopy.newMessageText = "";
-      return stateCopy;
     }
-    case CHANGE_SMS:
-      let stateCopy = { ...state };
-      stateCopy.newMessageText = action.smsChange;
-      return stateCopy;
     default:
       return state;
   }

@@ -1,19 +1,13 @@
 import { profileApi } from "../Api/Api";
 
-const CHANGE_POST = "CHANGE-POST";
 const ADD_POST = "ADD-POST";
 const SETPROFILESTATE = "SETPROFILESTATE";
 const SETSTATUS = "SETSTATUS";
 
-export let changePostActionCreator = (text) => {
-  return {
-    type: CHANGE_POST,
-    postChange: text,
-  };
-};
-export let addPostActionCreater = () => {
+export let addPost = (postMessage) => {
   return {
     type: ADD_POST,
+    postMessage,
   };
 };
 export let setProfileState = (profileInfo) => {
@@ -35,27 +29,21 @@ let initialState = {
     { id: 2, message: "Hey there i like you", likesCount: 20 },
     { id: 3, message: "helpa me bratan", likesCount: 30 },
   ],
-  newPostText: "",
   profileState: null,
   status: "",
 };
+
 const profileReducer = (state = initialState, action) => {
   switch (action.type) {
     case ADD_POST: {
-      let newpost = {
-        id: 4,
-        message: state.newPostText,
-        likesCount: 0,
+      return {
+        ...state,
+        postData: [
+          ...state.postData,
+          { id: 4, message: action.postMessage, likesCount: 0 },
+        ],
       };
-      let stateCopy = { ...state };
-      stateCopy.postData.push(newpost);
-      stateCopy.newPostText = "";
-      return stateCopy;
     }
-    case CHANGE_POST:
-      let stateCopy = { ...state };
-      stateCopy.newPostText = action.postChange;
-      return stateCopy;
     case SETPROFILESTATE: {
       return {
         ...state,
