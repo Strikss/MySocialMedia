@@ -1,4 +1,4 @@
-import { userApi } from "../Api/Api";
+import { authApi } from "../Api/Api";
 const SET_AUTH_DATA = "SETAUTHDATA";
 
 let initialState = {
@@ -31,7 +31,7 @@ export let setAuthData = (id, login, email) => {
 
 export let AuthThunk = () => {
   return (dispatch) => {
-    userApi.auth().then((response) => {
+    authApi.auth().then((response) => {
       if (response.data.resultCode === 0) {
         let { id, login, email } = response.data.data;
         dispatch(setAuthData(id, login, email));

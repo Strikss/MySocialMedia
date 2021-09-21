@@ -20,12 +20,22 @@ export const userApi = {
     return instance.delete(`follow/${userId}`);
   },
   follow(userId) {
-    return instance.post(`follow/${userId}`, {});
+    return instance.post(`follow/${userId}`);
   },
+};
+export const authApi = {
+  auth() {
+    return instance.get("auth/me");
+  },
+};
+export const profileApi = {
   getUserId(userId) {
     return instance.get(`/profile/` + userId);
   },
-  auth() {
-    return instance.get("auth/me");
+  getStatus(userId) {
+    return instance.get(`/profile/status/` + userId);
+  },
+  setStatus(status) {
+    return instance.put(`/profile/status/`, { status });
   },
 };

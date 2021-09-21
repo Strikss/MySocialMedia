@@ -1,7 +1,9 @@
+import { profileApi } from "../Api/Api";
+
 const CHANGE_POST = "CHANGE-POST";
 const ADD_POST = "ADD-POST";
 const SETPROFILESTATE = "SETPROFILESTATE";
-import { userApi } from "../Api/Api";
+const SETSTATUS = "SETSTATUS";
 
 export let changePostActionCreator = (text) => {
   return {
@@ -20,6 +22,12 @@ export let setProfileState = (profileInfo) => {
     profileInfo,
   };
 };
+export let setStatus = (status) => {
+  return {
+    type: SETSTATUS,
+    status,
+  };
+};
 
 let initialState = {
   postData: [
@@ -29,6 +37,7 @@ let initialState = {
   ],
   newPostText: "",
   profileState: null,
+  status: "",
 };
 const profileReducer = (state = initialState, action) => {
   switch (action.type) {
@@ -53,16 +62,37 @@ const profileReducer = (state = initialState, action) => {
         profileState: action.profileInfo,
       };
     }
+    case SETSTATUS: {
+      return {
+        ...state,
+        status: action.status,
+      };
+    }
     default:
       return state;
   }
 };
 export let userIdThunk = (userId) => {
   return (dispatch) => {
-    userApi.getUserId(userId).then((response) => {
+    profileApi.getUserId(userId).then((response) => {
       dispatch(setProfileState(response.data));
     });
   };
 };
-
+export let setStatusThunk = (status) => {
+  return (dispatch) => {
+    profileApi.setStatus(status).then((response) => {
+      if (response.data.resultCode == 0) {
+        dispatch(setStatus(status));
+      }
+    });
+  };
+};
+export let getStatusThunk = (userId) => {
+  return (dispatch) => {
+    profileApi.getStatus(userId).then((response) => {
+      dispatch(setStatus(response.data));
+    });
+  };
+};
 export default profileReducer;

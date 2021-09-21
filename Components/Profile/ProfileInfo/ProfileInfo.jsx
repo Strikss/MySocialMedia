@@ -1,6 +1,8 @@
 import classes from "./ProfileInfo.module.css";
 import Preloader from "../../Common/Preloader/Preloaders";
 import GOD from "../../../Avatar/GOD.png";
+import ProfileStatus from "./ProfileStatus";
+
 const ProfileInfo = (props) => {
   if (!props.profileState) {
     return <Preloader />;
@@ -19,13 +21,9 @@ const ProfileInfo = (props) => {
             width="150px"
           />
         </div>
-        <img
-          src="https://logos-world.net/wp-content/uploads/2020/04/Huawei-Logo.png"
-          width="100px"
-          heigth="100px"
-          alt="hey"
-        />
-        AVA + DESCTIPTION
+        <div>
+          <ProfileStatus message={props.status} setStatus={props.setStatus} />
+        </div>
       </div>
     </div>
   );
