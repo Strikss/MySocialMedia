@@ -1,16 +1,36 @@
 import { Field, reduxForm } from "redux-form";
-
+import { PostAreaStyle } from "../Common/FormStyle/FormStyle";
+import { required, setMaxlength } from "../Validate/Validate";
+const setMaxLength10 = setMaxlength(10);
 const LoginForm = (props) => {
   return (
     <form onSubmit={props.handleSubmit}>
       <div>
-        <Field component={"input"} placeholder={"Login"} name={"login"} />
+        <Field
+          component={PostAreaStyle}
+          placeholder={"Login"}
+          name={"login"}
+          Formtype="input"
+          validate={[required, setMaxLength10]}
+        />
       </div>
       <div>
-        <Field component={"input"} placeholder={"Password"} name={"password"} />
+        <Field
+          component={PostAreaStyle}
+          placeholder={"Password"}
+          name={"password"}
+          Formtype="input"
+          validate={[required, setMaxLength10]}
+        />
       </div>
       <div>
-        <Field component={"input"} name={"rememberMe"} type={"checkbox"} />
+        <Field
+          component={PostAreaStyle}
+          name={"rememberMe"}
+          type={"checkbox"}
+          Formtype="input"
+          validate={[required, setMaxLength10]}
+        />
         remember me
       </div>
       <div>

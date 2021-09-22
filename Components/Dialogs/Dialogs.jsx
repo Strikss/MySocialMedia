@@ -3,6 +3,8 @@ import MessageItem from "./Messages/MessageItem";
 import DialogItem from "./Dialogs/DialogItem";
 import React from "react";
 import { reduxForm, Field } from "redux-form";
+import { PostAreaStyle } from "../Common/FormStyle/FormStyle";
+import { required, setMaxlength } from "../Validate/Validate";
 
 const Dialogs = (props) => {
   let dialogElements = props.dialog.dialogData.map((d) => (
@@ -24,15 +26,17 @@ const Dialogs = (props) => {
     </div>
   );
 };
-
+const setMaxlength15 = setMaxlength(15);
 const DialogForm = (props) => {
   return (
     <form onSubmit={props.handleSubmit}>
       <div>
         <Field
-          component={"textarea"}
+          validate={[required, setMaxlength15]}
+          component={PostAreaStyle}
           name={"dialogText"}
           placeholder="Enter your message"
+          Formtype="textarea"
         />
       </div>
       <div>

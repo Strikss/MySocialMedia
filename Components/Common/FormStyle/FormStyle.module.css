@@ -1,0 +1,11 @@
+.formControl {
+  width: fit-content;
+  border: 1px solid rgb(3, 253, 3);
+}
+.formControlError div {
+  width: fit-content;
+  border: 2px solid red;
+}
+.formControlError span {
+  color: red;
+}
