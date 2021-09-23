@@ -1,6 +1,5 @@
 import s from "./FormStyle.module.css";
 export const PostAreaStyle = ({ input, meta, Formtype, ...props }) => {
-  debugger;
   const hasError = meta.touched && meta.error;
   return (
     <div className={hasError ? s.formControlError : s.formControl}>

@@ -27,6 +27,12 @@ export const authApi = {
   auth() {
     return instance.get("auth/me");
   },
+  logIn(email, password, rememberMe = false) {
+    return instance.post("auth/login", { email, password, rememberMe });
+  },
+  logOut() {
+    return instance.delete("auth/login");
+  },
 };
 export const profileApi = {
   getUserId(userId) {

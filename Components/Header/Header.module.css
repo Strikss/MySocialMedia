@@ -3,7 +3,7 @@
   border-bottom: 3px solid rgba(38, 38, 38, 0.371);
 }
 .auth * {
-  color: white;
+  color: rgba(215, 226, 5, 0.645);
   text-decoration: none;
   float: right;
 }

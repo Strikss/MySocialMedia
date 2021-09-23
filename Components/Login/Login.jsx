@@ -1,17 +1,21 @@
+import { connect } from "react-redux";
 import { Field, reduxForm } from "redux-form";
 import { PostAreaStyle } from "../Common/FormStyle/FormStyle";
 import { required, setMaxlength } from "../Validate/Validate";
-const setMaxLength10 = setMaxlength(10);
+import { logInThunk } from "../../Redux/authReducer";
+import { Redirect } from "react-router";
+import s from "./Login.module.css";
+const setMaxLength30 = setMaxlength(30);
 const LoginForm = (props) => {
   return (
     <form onSubmit={props.handleSubmit}>
       <div>
         <Field
           component={PostAreaStyle}
-          placeholder={"Login"}
-          name={"login"}
+          placeholder={"Email"}
+          name={"email"}
           Formtype="input"
-          validate={[required, setMaxLength10]}
+          validate={[required, setMaxLength30]}
         />
       </div>
       <div>
@@ -19,33 +23,40 @@ const LoginForm = (props) => {
           component={PostAreaStyle}
           placeholder={"Password"}
           name={"password"}
+          type="password"
           Formtype="input"
-          validate={[required, setMaxLength10]}
+          validate={[required, setMaxLength30]}
         />
       </div>
       <div>
         <Field
           component={PostAreaStyle}
           name={"rememberMe"}
-          type={"checkbox"}
+          type="checkbox"
           Formtype="input"
-          validate={[required, setMaxLength10]}
+          validate={[required, setMaxLength30]}
         />
         remember me
       </div>
       <div>
         <button>Login</button>
       </div>
+      {props.error && <div className={s.error}>{props.error}</div>}
     </form>
   );
 };
 
 const LoginReduxForm = reduxForm({ form: "login" })(LoginForm);
 
-const Login = () => {
-  let submit = (formdata) => {
-    console.log(formdata);
+const Login = (props) => {
+  let submit = (formData) => {
+    props.logInThunk(formData.email, formData.password, formData.rememberMe);
   };
+
+  if (props.isAuth) {
+    return <Redirect to={"/profile"} />;
+  }
+
   return (
     <>
       <h1>Log in</h1>
@@ -53,5 +64,8 @@ const Login = () => {
     </>
   );
 };
+const mapStateToProps = (state) => ({
+  isAuth: state.auth.isAuth,
+});
 
-export default Login;
+export default connect(mapStateToProps, { logInThunk })(Login);
