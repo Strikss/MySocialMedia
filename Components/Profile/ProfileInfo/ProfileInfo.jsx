@@ -1,6 +1,6 @@
 import classes from "./ProfileInfo.module.css";
 import Preloader from "../../Common/Preloader/Preloaders";
-import GOD from "../../../Avatar/GOD.png";
+import anonym from "../../../Avatar/anonymous.png";
 import ProfileStatusWithHooks from "./profileStatusWithHooks";
 
 const ProfileInfo = (props) => {
@@ -15,7 +15,7 @@ const ProfileInfo = (props) => {
             src={
               props.profileState.photos.small != null
                 ? props.profileState.photos.small
-                : GOD
+                : anonym
             }
             heigth="150px"
             width="150px"

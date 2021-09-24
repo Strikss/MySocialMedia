@@ -1,6 +1,6 @@
 import classes from "./Users.module.css";
 import React from "react";
-import photo from "../../Avatar/user.png";
+import anonym from "../../Avatar/anonymous.png";
 import { NavLink } from "react-router-dom";
 
 let Users = (props) => {
@@ -29,7 +29,7 @@ let Users = (props) => {
             <NavLink to={"/profile/" + u.id}>
               <div>
                 <img
-                  src={u.photos.small != null ? u.photos.small : photo}
+                  src={u.photos.small != null ? u.photos.small : anonym}
                   height="100px"
                   width="100px"
                 />

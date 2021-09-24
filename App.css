@@ -5,9 +5,9 @@
   grid-template-areas:
     "h h"
     "n c";
-  grid-template-rows: 0.1fr 1fr;
-  grid-template-columns: 0.1fr 1fr;
-  background: linear-gradient(to right, #bbd2c5, #536976, #292e49);
+  grid-template-rows: 0.1fr 14.43fr;
+  grid-template-columns: 0.15fr 1fr;
+  background: linear-gradient(to right, #e0eafc 40%, #4ca1af);
 }
 textarea {
   resize: none;
