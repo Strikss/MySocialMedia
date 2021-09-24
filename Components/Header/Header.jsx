@@ -1,5 +1,6 @@
 import classes from "./Header.module.css";
 import { NavLink } from "react-router-dom";
+import Logo from "../../Avatar/Logo.png";
 const Header = (props) => {
   return (
     <header className={classes.header}>
@@ -7,18 +8,19 @@ const Header = (props) => {
         <div>
           {props.isAuth ? (
             <div>
-              {props.login} -<button onClick={props.logOutThunk}>logout</button>
+              <span>
+                {props.login}
+                <div>
+                  <button onClick={props.logOutThunk}>Logout</button>
+                </div>
+              </span>
             </div>
           ) : (
-            <NavLink to={"/login"}>login</NavLink>
+            <NavLink to={"/login"}>Login</NavLink>
           )}
         </div>
       </div>
-      <img
-        src="https://www.freelogoservices.com/blog/wp-content/uploads/transparent-logo.jpg"
-        height="64px"
-        width="64px"
-      />
+      <img src={Logo} height="64px" width="64px" />
     </header>
   );
 };

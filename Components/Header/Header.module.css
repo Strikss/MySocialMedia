@@ -1,9 +1,12 @@
 .header {
   grid-area: h;
-  border-bottom: 3px solid rgba(38, 38, 38, 0.371);
+  border-bottom: transparent;
+  background: linear-gradient(to bottom, #e0eafc 50%, #4ca2af3f);
 }
 .auth * {
-  color: rgba(215, 226, 5, 0.645);
+  color: rgba(3, 29, 55, 0.686);
+  font-size: 1.1rem;
+  font-weight: 400;
   text-decoration: none;
   float: right;
 }
