@@ -15,6 +15,14 @@ import React from "react";
 import Preloader from "../Common/Preloader/Preloaders";
 import { compose } from "redux";
 import { withAuthRedirect } from "../Hoc/Hoc";
+import {
+  getCurrentPage,
+  getInProgress,
+  getIsFetching,
+  getPageSize,
+  getTotalUsersCount,
+  getUsers,
+} from "../../Redux/UsersSelector";
 
 class UsersContainer extends React.Component {
   componentDidMount() {
@@ -44,12 +52,12 @@ class UsersContainer extends React.Component {
 }
 let mapStateToProps = (state) => {
   return {
-    users: state.usersPage.users,
-    pageSize: state.usersPage.pageSize,
-    totalUsersCount: state.usersPage.totalUsersCount,
-    currentPage: state.usersPage.currentPage,
-    isFetching: state.usersPage.isFetching,
-    inProgress: state.usersPage.inProgress,
+    users: getUsers(state),
+    pageSize: getPageSize(state),
+    totalUsersCount: getTotalUsersCount(state),
+    currentPage: getCurrentPage(state),
+    isFetching: getIsFetching(state),
+    inProgress: getInProgress(state),
   };
 };
 

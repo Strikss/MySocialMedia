@@ -1,7 +1,7 @@
 import classes from "./ProfileInfo.module.css";
 import Preloader from "../../Common/Preloader/Preloaders";
 import GOD from "../../../Avatar/GOD.png";
-import ProfileStatus from "./ProfileStatus";
+import ProfileStatusWithHooks from "./profileStatusWithHooks";
 
 const ProfileInfo = (props) => {
   if (!props.profileState) {
@@ -22,7 +22,10 @@ const ProfileInfo = (props) => {
           />
         </div>
         <div>
-          <ProfileStatus message={props.status} setStatus={props.setStatus} />
+          <ProfileStatusWithHooks
+            status={props.status}
+            setStatus={props.setStatus}
+          />
         </div>
       </div>
     </div>
