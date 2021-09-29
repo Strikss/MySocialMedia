@@ -29,36 +29,29 @@ export let setAuthData = (id, login, email, isAuth) => {
   };
 };
 
-export let AuthThunk = () => {
-  return (dispatch) => {
-    return authApi.auth().then((response) => {
-      if (response.data.resultCode === 0) {
-        let { id, login, email } = response.data.data;
-        dispatch(setAuthData(id, login, email, true));
-      }
-    });
-  };
+export let AuthThunk = () => async (dispatch) => {
+  let response = await authApi.auth();
+  if (response.data.resultCode === 0) {
+    let { id, login, email } = response.data.data;
+    dispatch(setAuthData(id, login, email, true));
+  }
 };
-export let logInThunk = (email, password, rememberMe) => (dispatch) => {
-  return authApi.logIn(email, password, rememberMe).then((response) => {
-    if (response.data.resultCode === 0) {
-      dispatch(AuthThunk());
-    } else {
-      let message =
-        response.data.messages.length > 0
-          ? response.data.messages[0]
-          : "Some Error";
-      dispatch(stopSubmit("login", { _error: message }));
-    }
-  });
+export let logInThunk = (email, password, rememberMe) => async (dispatch) => {
+  let response = await authApi.logIn(email, password, rememberMe);
+  if (response.data.resultCode === 0) {
+    dispatch(AuthThunk());
+  } else {
+    let message =
+      response.data.messages.length > 0
+        ? response.data.messages[0]
+        : "Some Error";
+    dispatch(stopSubmit("login", { _error: message }));
+  }
 };
-export let logOutThunk = () => {
-  return (dispatch) => {
-    authApi.logOut().then((response) => {
-      if (response.data.resultCode === 0) {
-        dispatch(setAuthData(null, null, null, false));
-      }
-    });
-  };
+export let logOutThunk = () => async (dispatch) => {
+  let response = await authApi.logOut();
+  if (response.data.resultCode === 0) {
+    dispatch(setAuthData(null, null, null, false));
+  }
 };
 export default authReducer;

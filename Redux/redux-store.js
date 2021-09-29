@@ -14,5 +14,6 @@ let reducers = combineReducers({
   form: formReducer,
   app: appReducer,
 });
+
 let store = createStore(reducers, applyMiddleware(thunkMiddleware));
 export default store;

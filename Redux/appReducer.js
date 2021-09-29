@@ -24,13 +24,9 @@ export let setInitialize = () => {
   };
 };
 
-export let initializeApp = () => {
-  return (dispatch) => {
-    let promise = dispatch(AuthThunk());
-    promise.then(() => {
-      dispatch(setInitialize());
-    });
-  };
+export let initializeApp = () => async (dispatch) => {
+  await dispatch(AuthThunk());
+  dispatch(setInitialize());
 };
 
 export default appReducer;

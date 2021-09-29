@@ -95,47 +95,35 @@ export let userInProgress = (loading, id) => ({
 });
 export let isFetchingD = (loading) => ({ type: ISFETCHING, loading });
 
-export let getUsersThunk = (currentPage, pageSize) => {
-  return (dispatch) => {
-    dispatch(isFetchingD(true));
-    userApi.getUsers(currentPage, pageSize).then((data) => {
-      dispatch(isFetchingD(false));
-      dispatch(setUsers(data.items));
-      dispatch(setTotalUsersCount(data.totalCount));
-    });
-  };
+export let getUsersThunk = (currentPage, pageSize) => async (dispatch) => {
+  dispatch(isFetchingD(true));
+  let data = await userApi.getUsers(currentPage, pageSize);
+  dispatch(isFetchingD(false));
+  dispatch(setUsers(data.items));
+  dispatch(setTotalUsersCount(data.totalCount));
 };
-export let setUsersThunk = (n, pageSize) => {
-  return (dispatch) => {
-    dispatch(setCurrentPage(n));
-    dispatch(isFetchingD(true));
+export let setUsersThunk = (n, pageSize) => async (dispatch) => {
+  dispatch(setCurrentPage(n));
+  dispatch(isFetchingD(true));
 
-    userApi.setUsers(n, pageSize).then((data) => {
-      dispatch(isFetchingD(false));
-      dispatch(setUsers(data.items));
-    });
-  };
+  let data = await userApi.setUsers(n, pageSize);
+  dispatch(isFetchingD(false));
+  dispatch(setUsers(data.items));
 };
-export let followThunk = (userId) => {
-  return (dispatch) => {
-    dispatch(userInProgress(true, userId));
-    userApi.follow(userId).then((response) => {
-      if (response.data.resultCode == 0) {
-        dispatch(follow(userId));
-      }
-      dispatch(userInProgress(false, userId));
-    });
-  };
+export let followThunk = (userId) => async (dispatch) => {
+  dispatch(userInProgress(true, userId));
+  let response = await userApi.follow(userId);
+  if (response.data.resultCode == 0) {
+    dispatch(follow(userId));
+  }
+  dispatch(userInProgress(false, userId));
 };
-export let unFollowThunk = (userId) => {
-  return (dispatch) => {
-    dispatch(userInProgress(true, userId));
-    userApi.unFollow(userId).then((response) => {
-      if (response.data.resultCode == 0) {
-        dispatch(unfollow(userId));
-      }
-      dispatch(userInProgress(false, userId));
-    });
-  };
+export let unFollowThunk = (userId) => async (dispatch) => {
+  dispatch(userInProgress(true, userId));
+  let response = await userApi.unFollow(userId);
+  if (response.data.resultCode == 0) {
+    dispatch(unfollow(userId));
+  }
+  dispatch(userInProgress(false, userId));
 };
 export default usersReducer;
