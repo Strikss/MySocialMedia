@@ -15,6 +15,7 @@ let initialState = {
   currentPage: 1,
   isFetching: true,
   inProgress: [],
+  portionSize: 10,
 };
 const usersReducer = (state = initialState, action) => {
   switch (action.type) {
@@ -55,7 +56,7 @@ const usersReducer = (state = initialState, action) => {
     case SETTOTALUSERS: {
       return {
         ...state,
-        totalUsersCount: action.totalUsers > 15 ? 100 : action.totalUsers,
+        totalUsersCount: action.totalUsers,
       };
     }
     case ISFETCHING: {
