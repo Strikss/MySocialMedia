@@ -43,4 +43,9 @@ export const profileApi = {
   setStatus(status) {
     return instance.put(`/profile/status/`, { status });
   },
+  setProfilePhoto(photoUrl) {
+    let formData = new FormData();
+    formData.append("image", photoUrl);
+    return instance.put(`/profile/photo`, formData);
+  },
 };

@@ -4,6 +4,10 @@ import anonym from "../../../Avatar/anonymous.png";
 import ProfileStatusWithHooks from "./profileStatusWithHooks";
 
 const ProfileInfo = (props) => {
+  const uploadPhoto = (e) => {
+    props.setProfileUrl(e.target.files[0]);
+  };
+  debugger;
   if (!props.profileState) {
     return <Preloader />;
   }
@@ -20,6 +24,10 @@ const ProfileInfo = (props) => {
             heigth="150px"
             width="150px"
           />
+          <div>
+            {!props.owner && <input type="file" onChange={uploadPhoto} />}
+          </div>
+          <div></div>
         </div>
         <div>
           <ProfileStatusWithHooks

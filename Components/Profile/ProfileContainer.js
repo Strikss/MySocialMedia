@@ -6,33 +6,41 @@ import {
   userIdThunk,
   setStatusThunk,
   getStatusThunk,
+  setProfileUrl,
 } from "../../Redux/profileReducer";
 import { withRouter } from "react-router";
 import { withAuthRedirect } from "../Hoc/Hoc";
 import { compose } from "redux";
-class ProfileContainer extends React.Component {
-  componentDidMount() {
-    let userId = this.props.match.params.userId;
+import { useEffect } from "react";
+
+const ProfileContainer = (props) => {
+  const refreshProfile = () => {
+    let userId = props.match.params.userId;
     if (!userId) {
-      userId = this.props.currentUserId;
+      userId = props.currentUserId;
       if (!userId) {
         userId = 19559;
       }
     }
-    this.props.userIdThunk(userId);
-    this.props.getStatusThunk(userId);
-  }
-  render() {
-    return (
-      <Profile
-        {...this.props}
-        profileState={this.props.profileState}
-        status={this.props.status}
-        setStatus={this.props.setStatusThunk}
-      />
-    );
-  }
-}
+
+    props.userIdThunk(userId);
+    props.getStatusThunk(userId);
+  };
+  useEffect(() => {
+    refreshProfile();
+  }, [props.match.params.userId]);
+
+  return (
+    <Profile
+      {...props}
+      owner={!!props.match.params.userId}
+      profileState={props.profileState}
+      status={props.status}
+      setStatus={props.setStatusThunk}
+      setProfileUrl={props.setProfileUrl}
+    />
+  );
+};
 
 let mapStateToProps = (state) => {
   return {
@@ -48,6 +56,7 @@ export default compose(
     userIdThunk,
     setStatusThunk,
     getStatusThunk,
+    setProfileUrl,
   }),
   withRouter
   //withAuthRedirect
