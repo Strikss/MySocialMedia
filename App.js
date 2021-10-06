@@ -12,6 +12,7 @@ import Settings from "./Components/Settingsss/Settings";
 import { compose } from "redux";
 import { Switch, withRouter } from "react-router";
 import Preloader from "./Components/Common/Preloader/Preloaders";
+import { Redirect } from "react-router";
 
 const DialogsContainer = React.lazy(() =>
   import("./Components/Dialogs/DialogsContainer")
@@ -39,6 +40,9 @@ class App extends React.Component {
         <div className="content">
           <Suspense fallback={<Preloader />}>
             <Switch>
+              <Route exact path="/">
+                <Redirect to="/profile" />
+              </Route>
               <Route
                 path="/profile/:userId?"
                 render={() => <ProfileContainer />}
@@ -49,6 +53,7 @@ class App extends React.Component {
               <Route path="/settings" render={() => <Settings />} />
               <Route path="/users" render={() => <UsersContainer />} />
               <Route path="/login" render={() => <Login />} />
+              <Route path="*" render={() => <div>404 NOT FOUND</div>} />
             </Switch>
           </Suspense>
         </div>

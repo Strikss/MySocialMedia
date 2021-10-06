@@ -22,17 +22,27 @@ export const userApi = {
     return instance.post(`follow/${userId}`);
   },
 };
+
 export const authApi = {
   auth() {
     return instance.get("auth/me");
   },
-  logIn(email, password, rememberMe = false) {
-    return instance.post("auth/login", { email, password, rememberMe });
+  logIn(email, password, rememberMe = false, captcha) {
+    return instance.post("auth/login", {
+      email,
+      password,
+      rememberMe,
+      captcha,
+    });
   },
   logOut() {
     return instance.delete("auth/login");
   },
+  getCaptchaUrl() {
+    return instance.get("/security/get-captcha-url");
+  },
 };
+
 export const profileApi = {
   getUserId(userId) {
     return instance.get(`/profile/` + userId);
@@ -47,5 +57,8 @@ export const profileApi = {
     let formData = new FormData();
     formData.append("image", photoUrl);
     return instance.put(`/profile/photo`, formData);
+  },
+  saveProfileDescription(profile) {
+    return instance.put(`/profile`, profile);
   },
 };

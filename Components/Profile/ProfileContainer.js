@@ -7,6 +7,7 @@ import {
   setStatusThunk,
   getStatusThunk,
   setProfileUrl,
+  saveProfileDescription,
 } from "../../Redux/profileReducer";
 import { withRouter } from "react-router";
 import { withAuthRedirect } from "../Hoc/Hoc";
@@ -33,11 +34,12 @@ const ProfileContainer = (props) => {
   return (
     <Profile
       {...props}
-      owner={!!props.match.params.userId}
+      owner={!props.match.params.userId}
       profileState={props.profileState}
       status={props.status}
       setStatus={props.setStatusThunk}
       setProfileUrl={props.setProfileUrl}
+      saveProfileDescription={props.saveProfileDescription}
     />
   );
 };
@@ -57,6 +59,7 @@ export default compose(
     setStatusThunk,
     getStatusThunk,
     setProfileUrl,
+    saveProfileDescription,
   }),
   withRouter
   //withAuthRedirect

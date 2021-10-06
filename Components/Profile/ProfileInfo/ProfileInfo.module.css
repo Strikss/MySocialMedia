@@ -1,3 +1,17 @@
 .avaDescript {
   padding: 10px 0px;
 }
+.contacts {
+  padding-left: 13px;
+}
+.avaDescript img {
+  border-radius: 50%;
+  height: 120px;
+  width: 120px;
+}
+.status {
+  padding: 10px 0px;
+}
+.description {
+  font-size: 1.1rem;
+}
