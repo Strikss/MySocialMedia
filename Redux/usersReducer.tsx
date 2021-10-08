@@ -8,16 +8,20 @@ const SETTOTALUSERS = "SETTOTALUSERS";
 const ISFETCHING = "ISFETCHING";
 const INPROGRESS = "INPROGRESS";
 
+type InitialStateType = typeof initialState;
+type UsersType = any;
+type InProgressType = {};
+
 let initialState = {
-  users: [],
+  users: [] as Array<UsersType>,
   pageSize: 5,
   totalUsersCount: 0,
   currentPage: 1,
   isFetching: true,
-  inProgress: [],
+  inProgress: [] as Array<InProgressType>,
   portionSize: 10,
 };
-const usersReducer = (state = initialState, action) => {
+const usersReducer = (state = initialState, action: any): InitialStateType => {
   switch (action.type) {
     case FOLLOW: {
       return {
@@ -78,40 +82,42 @@ const usersReducer = (state = initialState, action) => {
     }
   }
 };
-export let setCurrentPage = (currentPage) => ({
+export let setCurrentPage = (currentPage: number) => ({
   type: SETCURRENTPAGE,
   currentPage,
 });
-export let follow = (userId) => ({ type: FOLLOW, userId });
-export let unfollow = (userId) => ({ type: UNFOLLOW, userId });
-export let setUsers = (users) => ({ type: SETUSERS, users });
-export let setTotalUsersCount = (totalUsers) => ({
+export let follow = (userId: number) => ({ type: FOLLOW, userId });
+export let unfollow = (userId: number) => ({ type: UNFOLLOW, userId });
+export let setUsers = (users: number) => ({ type: SETUSERS, users });
+export let setTotalUsersCount = (totalUsers: number) => ({
   type: SETTOTALUSERS,
   totalUsers,
 });
-export let userInProgress = (loading, id) => ({
+export let userInProgress = (loading: boolean, id: number) => ({
   type: INPROGRESS,
   loading,
   id,
 });
-export let isFetchingD = (loading) => ({ type: ISFETCHING, loading });
+export let isFetchingD = (loading: boolean) => ({ type: ISFETCHING, loading });
 
-export let getUsersThunk = (currentPage, pageSize) => async (dispatch) => {
-  dispatch(isFetchingD(true));
-  let data = await userApi.getUsers(currentPage, pageSize);
-  dispatch(isFetchingD(false));
-  dispatch(setUsers(data.items));
-  dispatch(setTotalUsersCount(data.totalCount));
-};
-export let setUsersThunk = (n, pageSize) => async (dispatch) => {
-  dispatch(setCurrentPage(n));
-  dispatch(isFetchingD(true));
+export let getUsersThunk =
+  (currentPage: number, pageSize: number) => async (dispatch: any) => {
+    dispatch(isFetchingD(true));
+    let data = await userApi.getUsers(currentPage, pageSize);
+    dispatch(isFetchingD(false));
+    dispatch(setUsers(data.items));
+    dispatch(setTotalUsersCount(data.totalCount));
+  };
+export let setUsersThunk =
+  (n: number, pageSize: number) => async (dispatch: any) => {
+    dispatch(setCurrentPage(n));
+    dispatch(isFetchingD(true));
 
-  let data = await userApi.setUsers(n, pageSize);
-  dispatch(isFetchingD(false));
-  dispatch(setUsers(data.items));
-};
-export let followThunk = (userId) => async (dispatch) => {
+    let data = await userApi.setUsers(n, pageSize);
+    dispatch(isFetchingD(false));
+    dispatch(setUsers(data.items));
+  };
+export let followThunk = (userId: number) => async (dispatch: any) => {
   dispatch(userInProgress(true, userId));
   let response = await userApi.follow(userId);
   if (response.data.resultCode == 0) {
@@ -119,7 +125,7 @@ export let followThunk = (userId) => async (dispatch) => {
   }
   dispatch(userInProgress(false, userId));
 };
-export let unFollowThunk = (userId) => async (dispatch) => {
+export let unFollowThunk = (userId: number) => async (dispatch: any) => {
   dispatch(userInProgress(true, userId));
   let response = await userApi.unFollow(userId);
   if (response.data.resultCode == 0) {

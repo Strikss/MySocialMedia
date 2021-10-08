@@ -25,8 +25,18 @@ const UsersContainer = React.lazy(() =>
 );
 
 class App extends React.Component {
+  catchAllUnhandledErrors = (reason, promise) => {
+    alert("some error has ocured");
+  };
   componentDidMount() {
     this.props.initializeApp();
+    window.addEventListener("unhandledrejection", this.catchAllUnhandledErrors);
+  }
+  componentWillUnmount() {
+    window.removeEventListener(
+      "unhandledrejection",
+      this.catchAllUnhandledErrors
+    );
   }
   render() {
     if (!this.props.initialized) {
